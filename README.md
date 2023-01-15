@@ -1,7 +1,7 @@
 # hq-hack-23
 HireQuotient Hackathon 2023 - Team "Project Recon ONN"
 
-API Installation:
+### API Setup:
 - Clone repo and change directory to `backend`
 - Create and activate virtualenv
 ```
@@ -15,10 +15,10 @@ pip install -r requirements.txt
 - Set required environment variables in `.env` file
 - Start the API using the following command:
 ```
-uvicorn app:app --reload
+python3 app.py
 ```
 
-Frontend Setup:
+### Frontend Setup:
 - Change directory to `Frontend/Candsearcher`
 - Install required packages
 ```
