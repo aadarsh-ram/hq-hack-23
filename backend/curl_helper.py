@@ -2,7 +2,7 @@ import os
 import urllib.parse as urlparse
 import concurrent.futures
 from requests_html import HTMLSession
-import json
+import subprocess
 
 class SiteCurler():
     def __init__(self, incoming_query, offset):
@@ -74,3 +74,32 @@ class SiteCurler():
         except Exception as e:
             result.append({'candidate':'Error', 'error': str(e)})
         return result
+
+
+    def curl_mrec(self):
+        """
+        Curls mightyrecruiter.com resumes for a given query
+        """
+        query = urlparse.quote(self.incoming_query)
+
+        mrec_url = f"https://recruiter.mightyrecruiter.com/resumes/Get?jobID=0&page_number={self.offset+1}&page_size=20&search_on=jt&search_string={query}&location=&sortBy=score&radius=30&min_experience=0&max_experience=1200&mned=NA&min_age=0&max_age=90&hide_viewed_resume=false&hide_reviewed_resume=false&documentId=0&similarResumeSearch=false'"
+        cmd = f"""curl '{mrec_url} """ + """ \
+            -H 'Accept: application/json, text/plain, */*' \
+            -H 'Accept-Language: en-US,en;q=0.9' \
+            -H 'Connection: keep-alive' \
+            -H 'Cookie: utmParams=||||; G_ENABLED_IDPS=google; _mwr_visitortype=true; G_AUTHUSER_H=2; mwr_fnnl_bn=f73b39fa-75cd-4330-9775-bb8e256458ba; _mwr_trk_m={"requiresidentify":"false","requiresignup":"true","userid":"b626dbc6-2142-4876-a7a4-d0e8c6427120","email":"importsolution.trinit@gmail.com","firstname":"Import","lastname":"Solution","cname":"gg","ctype":"Employer","cwebsite":null,"mediapermission":"TRUE","contactbyphonepermission":"TRUE","accountstatus":"Pending","planstatus":null,"noofjobs":null,"usertoken":"1rMurzCKu5NbtpH3lIcg98DoouDc_44kwY6gniGSkPcClWpTzwNiMASvuXcelwjWZJHU8S_hHyMr-O0ECOPvT5dWyn-Z5dVKHhvNqvNbWjKOiI5NHlwwUMVkNvR0pGQbkiQtoijRsmZzxz-444gMd9n-wc9OBiWjvGwEqg7H-EMpuOej7UwMcTElttTivMkZFFkJV01oNKzhJxV-o9o6BNsmsp5lmWT4vD7xpTRiukbi-zWG4prcdKjfmAGLrbAJ4aZ5XvIT0nwaQtkWpw9K2zy7E-EERr8tcUiRNu3px_lTo8uXR8pD21iNtuRMoQWMu2thHsz2Jt3CJ_Kja_madutR8InWEMjvFT0ohXHnoL5qPiBRK23_036yvz2L1dH88zcknQNYSDxX7gHW-jj7ymotN1Xy-it2NojH85KFq4fB_lDiu2Hk9MF7vspI0iHOvMboOtDFcSM7hW6h9Iy1zZIlN-oKlapcOQVoSNMN0FANbFIwdmyqCrZLgmgWdMMhgFYStZicEBy07CeqcgJIZEw9DVm6W7H6sZgMd2F1ygTYP7EneGLe4PCJyqvyqdL2edT1mN74uzQmofc3Mb2BSSGaRyIZqx6owW1VSpL9FJipx75TUE5rJ0rYaOP01dK8KjaduWHXz5fLSrM5A6OKvHyY7MHo-ff-gE9uvtLt5nyV1IsB63Gnx3QxvM3YGmLkhpxNsNI0US6kJEJsA1_NYN5E_oCbK5auwRjvfeyon7KxDiHWrQPcuNSL3fPZ687SD-Jmh5RkNxPOLrewSQMx_nIiuKBuoaj0ChOd86ZWwtQynK7AV6x4jgE758RUUcc2vzxTJCkf2HScl6oTglgeVfUBdI-dkOzLce6obkKgETO5rXzZHDE8ZjvHSlEyZftrbpwP5EbagIu_W4BQgYB9b5UvAWigpR0T3w7td1qfDtXDcLcQwVg2xlJesqZzMtHo"}; JobTap=y8M-Di2X5JwLnBFYMUAi0iPVnhZXse6Z3cjuC57A3Afn_CzJsyTZ-6uDPUrXiq3T784PobGSdE1-X09Pou-qFdyx4mJMO9aomNjSu98ma2oS-nJG42ot79HAtqsX-QeeOpJS_PVS_y7HDS6UvLFcXZEts3QfTP18fLrqTy6lhIJ9B_Mx1ML-S9IpuePfnzvcFdt2Y_R_DBai1VmgsGq-wIiEtfk-bfbKxucbPky-_164qrjkNTNgmlYpvZNA-tGgC1lt_AO4lLbw1qs-iu0YbFg5Zymwuif_Ya1UTGfjql4tstXXeMSolmSjokdtmoT5RTPiOuhayoWWH0THWALR5AbbJDDMUmkv8oJ8iYD9SCBQsBN_jlN9aD37mgDh0AAC55htXy46YiJ68bW-VZj_8zDwheDsZy8zjfFyBv8s9w0T9nLRdVdZjaUQp3KJ6Re3q3oWp795ncMwyQc5SIsrSTqsW7NTcuEKq7AIqrFGdiak91KE0vCm-i58__cs2G0DyeCBGChNVQl-pIlhv91dICGcYoTWnPyIMXLzCY_x7-gwL_q9jTGNfJ_Iq2kxDHPhyiE5ddy8Bb6o0zem88K_3zbosDJ8Pset1A0lN2eMB-yhZKMP8AoePFpLqQPAn_kZ; _mwr_trk=%7B%22requiresidentify%22%3A%22false%22%2C%22requiresignup%22%3A%22False%22%2C%22userid%22%3A%22b626dbc6-2142-4876-a7a4-d0e8c6427120%22%2C%22email%22%3A%22importsolution.trinit%40gmail.com%22%2C%22firstname%22%3A%22Import%22%2C%22lastname%22%3A%22Solution%22%2C%22cname%22%3A%22gg%22%2C%22ctype%22%3A%22Employer%22%2C%22cwebsite%22%3Anull%2C%22mediapermission%22%3A%22TRUE%22%2C%22contactbyphonepermission%22%3A%22TRUE%22%2C%22accountstatus%22%3A%22Pending%22%2C%22planstatus%22%3Anull%2C%22noofjobs%22%3Anull%2C%22usertoken%22%3A%221rMurzCKu5NbtpH3lIcg98DoouDc_44kwY6gniGSkPcClWpTzwNiMASvuXcelwjWZJHU8S_hHyMr-O0ECOPvT5dWyn-Z5dVKHhvNqvNbWjKOiI5NHlwwUMVkNvR0pGQbkiQtoijRsmZzxz-444gMd9n-wc9OBiWjvGwEqg7H-EMpuOej7UwMcTElttTivMkZFFkJV01oNKzhJxV-o9o6BNsmsp5lmWT4vD7xpTRiukbi-zWG4prcdKjfmAGLrbAJ4aZ5XvIT0nwaQtkWpw9K2zy7E-EERr8tcUiRNu3px_lTo8uXR8pD21iNtuRMoQWMu2thHsz2Jt3CJ_Kja_madutR8InWEMjvFT0ohXHnoL5qPiBRK23_036yvz2L1dH88zcknQNYSDxX7gHW-jj7ymotN1Xy-it2NojH85KFq4fB_lDiu2Hk9MF7vspI0iHOvMboOtDFcSM7hW6h9Iy1zZIlN-oKlapcOQVoSNMN0FANbFIwdmyqCrZLgmgWdMMhgFYStZicEBy07CeqcgJIZEw9DVm6W7H6sZgMd2F1ygTYP7EneGLe4PCJyqvyqdL2edT1mN74uzQmofc3Mb2BSSGaRyIZqx6owW1VSpL9FJipx75TUE5rJ0rYaOP01dK8KjaduWHXz5fLSrM5A6OKvHyY7MHo-ff-gE9uvtLt5nyV1IsB63Gnx3QxvM3YGmLkhpxNsNI0US6kJEJsA1_NYN5E_oCbK5auwRjvfeyon7KxDiHWrQPcuNSL3fPZ687SD-Jmh5RkNxPOLrewSQMx_nIiuKBuoaj0ChOd86ZWwtQynK7AV6x4jgE758RUUcc2vzxTJCkf2HScl6oTglgeVfUBdI-dkOzLce6obkKgETO5rXzZHDE8ZjvHSlEyZftrbpwP5EbagIu_W4BQgYB9b5UvAWigpR0T3w7td1qfDtXDcLcQwVg2xlJesqZzMtHo%22%2C%22isfreetrial%22%3A%22false%22%2C%22trialtype%22%3A%22non%20rollover%22%2C%22iraccountid%22%3A%22105169%22%2C%22isirconversion%22%3A%22false%22%7D' \
+            -H 'Referer: https://recruiter.mightyrecruiter.com/resumes' \
+            -H 'Sec-Fetch-Dest: empty' \
+            -H 'Sec-Fetch-Mode: cors' \
+            -H 'Sec-Fetch-Site: same-origin' \
+            -H 'User-Agent: Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Mobile Safari/537.36' \
+            -H 'sec-ch-ua: "Not_A Brand";v="99", "Google Chrome";v="109", "Chromium";v="109"' \
+            -H 'sec-ch-ua-mobile: ?1' \
+            -H 'sec-ch-ua-platform: "Android"' \
+            --compressed"""
+        
+        result = subprocess.run(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        result_str = result.stdout.decode("utf-8")
+        res_json = eval(result_str.replace("null", "None").replace("false", "False").replace("true", "True"))
+        return res_json["ResultList"]
+    

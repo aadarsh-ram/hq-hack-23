@@ -82,6 +82,14 @@ async def get_candidate_profiles_pjf(response: Response, keywords: str, offset: 
     site_curler = SiteCurler(keywords, offset)
     return site_curler.curl_pjf()
 
+@app.get("/candidate-profiles/mrec")
+async def get_candidate_profiles_mrec(response: Response, keywords: str, offset: Optional[int] = 0):
+    """
+    Get candidate profiles from mightyrecruiter.com
+    """
+    site_curler = SiteCurler(keywords, offset)
+    return site_curler.curl_mrec()
+
 @app.post("/candidate-profiles/uploadpdf")
 async def handle_pdf_upload(request: Request, response: Response, file: UploadFile = File(...)
 ):
