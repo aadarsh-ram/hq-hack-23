@@ -18,6 +18,17 @@ pip install -r requirements.txt
 uvicorn app:app --reload
 ```
 
+Frontend Setup:
+- Change directory to `Frontend\Candsearcher`
+- Install required packages
+```
+yarn install
+```
+- Run the development environment
+```
+yarn run dev
+```
+
 Contributors:
 - [Aadarsh A](https://github.com/aadarsh-ram)
 - [Selvanayagam S](https://github.com/S-Selvanayagam)
