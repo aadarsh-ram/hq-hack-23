@@ -6,15 +6,52 @@ import ResultRow from "../ResultRow/ResultRow";
 
 
 const Result : resultProps = {
-    name : "Shubham Agarwal",
-    jobTitle : "NIT Tiruchirapalli"
+    jobTitle : "Sales manager",
+    location : "Delhi",
+    currentJob: "ICICI Bank",
+}
+
+const Result2 : resultProps = {
+    jobTitle : "Sales manager",
+    location : "Dehradun",
+    currentJob : "Idea cellular Ltd.",
+}
+const Result3 : resultProps = {
+    jobTitle : "Sales Executive",
+    location : "Navi mumbai",
+    currentJob : "Novasatam Food Pvt limited "
+}
+const Result4 : resultProps = {
+    jobTitle : "Tele Sales Executive",
+    location : "Amritsar",
+    currentJob : "Nextday marketing Solutions"
+}
+const Result5 : resultProps = {
+    jobTitle : "Sales Manager",
+    location : "Calicut",
+    currentJob : "Toy triangle"
+}
+const Result6 : resultProps = {
+    jobTitle : "Sales manager",
+    location : "Jamshedpur",
+    currentJob : "Kapsons Industries Pvt Ltd"
+}
+
+const Result7 : resultProps = {
+    jobTitle : "Sales Executive",
+    location : "Bangalore",
+    currentJob : "Vedantu"
+}
+const Result8 : resultProps = {
+    jobTitle : "Sales Executive",
+    location : "SantaCruz",
+    currentJob : "QuesCorp"
 }
 
 
 const ResultsPage = () => {
 
-    const [results,setresults] = useState<resultProps[]>([Result,Result,Result,Result,Result,Result,Result,Result,]);
-    const cards : number[]=[1,2,3,4,5,6,7,8];
+    const [results,setresults] = useState<resultProps[]>([Result,Result2,Result3,Result4,Result5,Result6,Result7,Result8]);
     const[pagenum,setpageNum] = useState<number>(0);
 
     return ( 

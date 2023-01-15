@@ -9,3 +9,12 @@
     padding: 3%;
     justify-content: space-between;
 }
+
+.name,.jobtitle,.location{
+    font-family: 'Secular One', sans-serif;
+    font-size: 1.2rem;
+}
+
+.modal{
+    width: 100%;
+}
