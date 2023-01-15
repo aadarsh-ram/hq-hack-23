@@ -19,7 +19,7 @@ uvicorn app:app --reload
 ```
 
 Frontend Setup:
-- Change directory to `Frontend\Candsearcher`
+- Change directory to `Frontend/Candsearcher`
 - Install required packages
 ```
 yarn install
