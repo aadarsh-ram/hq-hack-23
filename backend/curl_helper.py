@@ -1,5 +1,8 @@
 import os
 import urllib.parse as urlparse
+import concurrent.futures
+from requests_html import HTMLSession
+import json
 
 class SiteCurler():
     def __init__(self, incoming_query, offset):
@@ -35,3 +38,35 @@ class SiteCurler():
         result_str = os.popen(cmd).read()
         res_json = eval(result_str.replace("null", "None").replace("false", "False").replace("true", "True"))
         return res_json["results"]
+
+    def curl_pjf(self):
+        
+        """
+        Curls postjobfree.com resumes for a given query
+        """
+        session = HTMLSession()
+        result = []
+
+        def scrape_div(div):
+            link = div.find('a',first=True)
+            url = "https://www.postjobfree.com" + link.attrs['href']
+            try:
+                next_page_response = session.get(url)
+                data = next_page_response.html.find('div.normalText', first=True)
+                if data:
+                    return {'candidate':data.text}
+                else:
+                    return {'candidate':'Data not found'}
+            except Exception as e:
+                return {'candidate':'Error', 'error': str(e)}
+                
+        for page in range(1,self.offset+1):
+            url = f'https://www.postjobfree.com/resumes?q=&l=India&radius=25&r=20&p={page}'
+            try:
+                r = session.get(url)
+                divs = r.html.find('div.snippetPadding')
+                with concurrent.futures.ThreadPoolExecutor() as executor:
+                    result += list(executor.map(scrape_div, divs))
+            except Exception as e:
+                result.append({'candidate':'Error', 'error': str(e)})
+        return json.dumps(result)
