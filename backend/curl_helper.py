@@ -2,7 +2,7 @@ import os
 import urllib.parse as urlparse
 import concurrent.futures
 from requests_html import HTMLSession
-import json
+import subprocess
 
 class SiteCurler():
     def __init__(self, incoming_query, offset):
@@ -72,15 +72,13 @@ class SiteCurler():
 
 
     def curl_mrec(self):
-
         """
         Curls mightyrecruiter.com resumes for a given query
         """
         query = urlparse.quote(self.incoming_query)
-       
-        mrec_url = f"https://recruiter.mightyrecruiter.com/resumes/Get?jobID=0&page_number={self.offset+1}&page_size=20&search_on=jt&search_string={query}&location=&sortBy=score&radius=30&min_experience=0&max_experience=1200&mned=NA&min_age=0&max_age=90&hide_viewed_resume=false&hide_reviewed_resume=false&documentId=0&similarResumeSearch=false'"
 
-        cmd = f"""curl '{mrec_url}' \
+        mrec_url = f"https://recruiter.mightyrecruiter.com/resumes/Get?jobID=0&page_number={self.offset+1}&page_size=20&search_on=jt&search_string={query}&location=&sortBy=score&radius=30&min_experience=0&max_experience=1200&mned=NA&min_age=0&max_age=90&hide_viewed_resume=false&hide_reviewed_resume=false&documentId=0&similarResumeSearch=false'"
+        cmd = f"""curl '{mrec_url} """ + """ \
             -H 'Accept: application/json, text/plain, */*' \
             -H 'Accept-Language: en-US,en;q=0.9' \
             -H 'Connection: keep-alive' \
@@ -94,7 +92,9 @@ class SiteCurler():
             -H 'sec-ch-ua-mobile: ?1' \
             -H 'sec-ch-ua-platform: "Android"' \
             --compressed"""
-        result_str = os.popen(cmd).read()
+        
+        result = subprocess.run(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        result_str = result.stdout.decode("utf-8")
         res_json = eval(result_str.replace("null", "None").replace("false", "False").replace("true", "True"))
-        return res_json["results"]
+        return res_json["ResultList"]
     
