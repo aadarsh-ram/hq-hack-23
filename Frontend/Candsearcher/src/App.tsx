@@ -7,7 +7,7 @@ const App: () => JSX.Element = () => {
 
 	return (
 		<div className={styles.container}>
-			<ResultsPage />		
+			<Upload />		
 		</div>
 	);
 };

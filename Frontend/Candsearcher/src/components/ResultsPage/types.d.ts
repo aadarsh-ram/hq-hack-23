@@ -3,4 +3,8 @@ export type resultProps = {
     name? : string,
     phoneNo? : string,
     jobTitle? : string,
+    location? : string,
+    currentJob? :string,
+    experience? :string,
+    skills? :string
 }
