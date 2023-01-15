@@ -1,9 +1,9 @@
 {
-		"name": "aaveg-inductions",
+		"name": "candsearch",
 		"version": "1.0.0",
 		"description": "Codebase for Aaveg Inductions site",
-		"repository": "https://github.com/delta/aaveg-inductions.git",
-		"author": "Delta Force",
+		"repository": "https://github.com/aadarsh-ram/hq-hack-23.git",
+		"author": "Project onn",
 		"license": "MIT",
 		"scripts": {
 				"lint": "eslint --ext .js,.jsx,.ts,.tsx .",

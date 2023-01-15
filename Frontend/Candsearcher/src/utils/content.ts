@@ -41,5 +41,14 @@ const teamContent: TeamContent[] = [
 	},
 ];
 
-export { teamContent };
-export type { TeamContent };
+interface Apiurl{
+	url : string
+}
+
+const Apiurls : Apiurl[] = [
+	{
+		url : "http://localhost:8000/candidate-profiles/uploadpdf"
+	},
+]
+
+export { Apiurls };
