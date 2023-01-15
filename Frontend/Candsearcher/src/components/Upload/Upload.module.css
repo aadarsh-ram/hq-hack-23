@@ -1,0 +1,42 @@
+.upload{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: #CEF4F6;
+}
+
+.uploadBox{
+    width: 30%;
+    height: 50%;
+    background-color: #FFFFFF;
+    border-radius: 15px;
+    box-shadow: 8px 10px 8px 10px #4D4B4C;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+img{
+    margin-top: 10%;
+    width: 100%;
+    height: 50%;
+    object-fit: contain;
+}
+
+.uploadbtn{
+    text-align: center;
+    margin-top: 3%;
+    width: 30%;
+    border: 3px solid #BEF3FA !important;
+    border-radius: 10px !important;
+}
+
+.buttondiv{
+    width: 100%;
+    height: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
