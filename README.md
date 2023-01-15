@@ -18,6 +18,11 @@ pip install -r requirements.txt
 python3 app.py
 ```
 
+### Database Setup:
+- Install PostgreSQL (currently tested on v15)
+- Create a new database of your choice
+- Update the .env file in backend with your credentials
+
 ### Frontend Setup:
 - Change directory to `Frontend/Candsearcher`
 - Install required packages
