@@ -6,17 +6,17 @@ const Navbar = () => {
     return ( 
         <div className={styles.navbar}>
             <div className={styles.navelement}>
-                <Button>
+                <Button href="/">
                     Home
                 </Button>
             </div>
             <div className={styles.navelement}>
-                <Button>
+                <Button href="/upload">
                     Upload file
                 </Button>
             </div>
             <div className={styles.navelement}>
-                <Button>
+                <Button href="/alluploads">
                     My uploads
                 </Button>
             </div>
