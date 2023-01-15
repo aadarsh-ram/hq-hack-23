@@ -3,6 +3,7 @@ import styles from './Upload.module.css'
 import img from '../../../public/assets/Uploadimg.png'
 import { Button, IconButton } from "@mui/material";
 import { UploadFile } from "@mui/icons-material";
+import { Apiurls } from "../../utils/content";
 // import uploadIcon from '../../../public/assets/uploadIcon.png'
 
 const Upload = () => {
@@ -21,14 +22,12 @@ const Upload = () => {
     }
 
     const handleupload = (event : React.ChangeEvent<HTMLInputElement>)=>{
-        console.log("gg");
-        console.log(event.target.files)
         if(event.target.files!=null){
             setIsFilePicked(true)
-            let Fileeee:File = event.target.files[0];
+            let uploadedFile:File = event.target.files[0];
             const file = new FormData();
-		    file.append('file', Fileeee);
-            fetch("http://localhost:8000/candidate-profiles/uploadpdf",
+		    file.append('file', uploadedFile);
+            fetch(Apiurls[0].url,
                 {
 				    method: 'POST',
                     body:file,
