@@ -40,7 +40,7 @@ class SiteCurler():
         return res_json["results"]
 
     def curl_pjf(self):
-        
+       
         """
         Curls postjobfree.com resumes for a given query
         """
@@ -59,14 +59,13 @@ class SiteCurler():
                     return {'candidate':'Data not found'}
             except Exception as e:
                 return {'candidate':'Error', 'error': str(e)}
-                
-        for page in range(1,self.offset+1):
-            url = f'https://www.postjobfree.com/resumes?q=&l=India&radius=25&r=20&p={page}'
-            try:
-                r = session.get(url)
-                divs = r.html.find('div.snippetPadding')
-                with concurrent.futures.ThreadPoolExecutor() as executor:
-                    result += list(executor.map(scrape_div, divs))
-            except Exception as e:
-                result.append({'candidate':'Error', 'error': str(e)})
+
+        url = f'https://www.postjobfree.com/resumes?q=&l=India&radius=25&r=20&p={self.offset+1}'
+        try:
+            r = session.get(url)
+            divs = r.html.find('div.snippetPadding')
+            with concurrent.futures.ThreadPoolExecutor() as executor:
+                result += list(executor.map(scrape_div, divs))
+        except Exception as e:
+            result.append({'candidate':'Error', 'error': str(e)})
         return json.dumps(result)
