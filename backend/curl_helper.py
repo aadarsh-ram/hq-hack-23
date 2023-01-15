@@ -1,12 +1,10 @@
 import os
-from dotenv import load_dotenv
 import urllib.parse as urlparse
 
 class SiteCurler():
     def __init__(self, incoming_query, offset):
         self.incoming_query = incoming_query
         self.offset = offset
-        load_dotenv()
 
     def curl_indeed(self):
         """
