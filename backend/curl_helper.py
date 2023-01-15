@@ -68,4 +68,4 @@ class SiteCurler():
                 result += list(executor.map(scrape_div, divs))
         except Exception as e:
             result.append({'candidate':'Error', 'error': str(e)})
-        return json.dumps(result)
+        return result
