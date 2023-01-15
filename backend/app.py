@@ -74,6 +74,14 @@ async def get_candidate_profiles(response: Response, keywords: str, offset: Opti
     site_curler = SiteCurler(keywords, offset)
     return site_curler.curl_indeed()
 
+@app.get("/candidate-profiles/pjf")
+async def get_candidate_profiles_pjf(response: Response, keywords: str, offset: Optional[int] = 0):
+    """
+    Get candidate profiles from postjobfree.com
+    """
+    site_curler = SiteCurler(keywords, offset)
+    return site_curler.curl_pjf()
+
 @app.post("/candidate-profiles/uploadpdf")
 async def handle_pdf_upload(request: Request, response: Response, file: UploadFile = File(...)
 ):
