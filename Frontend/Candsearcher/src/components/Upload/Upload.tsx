@@ -4,15 +4,10 @@ import img from '../../../public/assets/Uploadimg.png'
 import { Button, IconButton } from "@mui/material";
 import { UploadFile } from "@mui/icons-material";
 import { Apiurls } from "../../utils/content";
-// import uploadIcon from '../../../public/assets/uploadIcon.png'
+import ResultsPage from "../ResultsPage/ResultsPage";
 
 const Upload = () => {
-
-    // const[isSelected,setIsSelected] = useState(false);
-    // const [selectedFile, setSelectedFile] = useState<any>(null);
 	const [isFilePicked, setIsFilePicked] = useState(false);
-
-    // let file : File = undefined
     const input = useRef<HTMLInputElement>(null);
 
     const handleclick = ()=>{
@@ -23,7 +18,6 @@ const Upload = () => {
 
     const handleupload = (event : React.ChangeEvent<HTMLInputElement>)=>{
         if(event.target.files!=null){
-            setIsFilePicked(true)
             let uploadedFile:File = event.target.files[0];
             const file = new FormData();
 		    file.append('file', uploadedFile);
@@ -38,29 +32,30 @@ const Upload = () => {
             .catch((error)=>{
                 console.log(error);
             })
+            setIsFilePicked(true)
         }
     }
 
     return (
-        <div className={styles.upload}>
-            <input
-                accept="application/pdf"
-                style={{ display: 'none' }}
-                type="file"
-                hidden
-                ref={input}
-                onChange={handleupload}
-            />
-            <div className={styles.uploadBox}>
-                <img src={img}>
-                </img>
-                <div className={styles.buttondiv}>
-                    <Button endIcon={<UploadFile />} className={styles.uploadbtn} onClick={handleclick}>
-                        Upload
-                    </Button>
-                </div>
+        !isFilePicked? <div className={styles.upload}>
+        <input
+            accept="application/pdf"
+            style={{ display: 'none' }}
+            type="file"
+            hidden
+            ref={input}
+            onChange={handleupload}
+        />
+        <div className={styles.uploadBox}>
+            <img src={img}>
+            </img>
+            <div className={styles.buttondiv}>
+                <Button endIcon={<UploadFile />} className={styles.uploadbtn} onClick={handleclick}>
+                    Upload
+                </Button>
             </div>
         </div>
+        </div>: <ResultsPage />
     );
 }
  
