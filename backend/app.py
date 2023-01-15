@@ -12,6 +12,7 @@ from fastapi.exceptions import HTTPException
 from curl_helper import SiteCurler
 from pdf_parser import parse_pdf
 from db_operations import Database
+from keyword_extractor import get_jd_keywords
 
 # Import all environment variables
 load_dotenv()
@@ -92,7 +93,8 @@ async def handle_pdf_upload(request: Request, response: Response, file: UploadFi
                 await out_file.write(content)
             
             content = parse_pdf(filepath) # JD Content
-            keywords = "test" # Keywords
+            keywords = get_jd_keywords(content) # Keywords
+
             await db.insert_jd(content, keywords)
 
             return {"message": "File uploaded successfully"}
