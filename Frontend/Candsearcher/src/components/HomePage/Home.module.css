@@ -1,0 +1,27 @@
+.container{
+    height: 80%;
+    width: 100%;
+    position: relative;
+    top: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title{
+    width: 100%;
+    text-align: center;
+}
+
+.description{
+    margin-top: 2%;
+}
+
+.buttondiv{
+    margin-top: 2%;
+    margin-right: 2%;
+}
+
+img {
+    margin-top: 3%;
+}

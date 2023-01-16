@@ -1,4 +1,4 @@
-import { Button, Dialog} from "@mui/material";
+import { Button, Dialog, Typography} from "@mui/material";
 import * as React from "react"
 import styles from "./ViewUploads.module.css"
 import { Apiurls } from "../../utils/content";
@@ -92,7 +92,9 @@ const ViewUploads = () => {
         <div className={styles.container}>
             <Modal open={open} handleClose={handleclose} content={jdcontent} />
             <div className={styles.title}>
-                My Uploads
+                <Typography variant="h4">
+                    My Uploads
+                </Typography>
             </div>
             {fetchedjds? <div className={styles.uploads}>
                     {
