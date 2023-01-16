@@ -3,6 +3,7 @@ import { resultProps } from "./types";
 import styles from "./ResultsPage.module.css"
 import Resultcard from "../ResultCard/ResultCard";
 import ResultRow from "../ResultRow/ResultRow";
+import { Apiurls } from "../../utils/content";
 
 
 const Result : resultProps = {
@@ -53,6 +54,36 @@ const ResultsPage = () => {
 
     const [results,setresults] = useState<resultProps[]>([Result,Result2,Result3,Result4,Result5,Result6,Result7,Result8]);
     const[pagenum,setpageNum] = useState<number>(0);
+
+    useEffect(()=>{
+        fetch(`${Apiurls[2].url}/1`,
+            {
+                method:'GET',
+                headers:{
+                    'accept':'application/json'
+                }
+            }
+        ).then(async(response)=>{
+            let jd = await(response.json())
+            console.log(jd);
+            console.log("here");
+            fetch(encodeURI(`${Apiurls[3].url}?keywords=${(jd.keywords)}&offset=1`),
+                {
+                    method:'GET',
+                    headers:{
+                        'accept':'application/json'
+                    }
+                }
+            ).then(async(res)=>{
+                let candidates = await(res.json())
+                console.log(candidates);
+            }).catch((e)=>{
+                console.log(e);
+            })
+        }).catch((e)=>{
+            console.log(e)
+        })
+    },[])
 
     return ( 
         <div className={styles.pageContainer}>
