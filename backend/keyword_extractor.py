@@ -28,6 +28,7 @@ def get_jd_keywords(jd_content):
     text_split = response_text.split("\n")
 
     job_title = text_split[0].split(':')[1].strip()
-    keywords = text_split[1].split(':')[1].strip()
+    keywords_str = text_split[1].split(':')[1].strip()
+    keywords_query = ' OR'.join(keywords_str.split(','))
 
-    return job_title+', '+keywords
+    return job_title+' ('+keywords_query+')'

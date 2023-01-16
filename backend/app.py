@@ -115,7 +115,7 @@ async def handle_pdf_upload(request: Request, response: Response, file: UploadFi
 
             return {"message": "File uploaded successfully"}
             
-    except Exception as e:
+    except:
         raise HTTPException(status_code=500, detail="File upload unsuccessful")
 
 if __name__ == '__main__':
