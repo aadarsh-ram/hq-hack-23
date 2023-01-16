@@ -1,7 +1,7 @@
 import openai
 import os
 
-openai.api_key = os.getenv("OPENAI_API_KEY", "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")
+openai.api_key = os.getenv("OPENAI_API_KEY")
 COMPLETIONS_MODEL = "text-davinci-003"
 
 def get_jd_keywords(jd_content):

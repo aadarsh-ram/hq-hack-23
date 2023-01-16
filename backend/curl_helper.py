@@ -16,7 +16,7 @@ class SiteCurler():
         query = urlparse.quote(self.incoming_query)
 
         # This token is user-specific and is obtained from the indeed.com resumes page.
-        token = os.getenv("INDEED_CSRF_TOKEN", "TNy4j2yk6FPxU53dPeajS2LDdHKdu3g9")
+        token = os.getenv("INDEED_CSRF_TOKEN")
         indeed_url = f"https://resumes.indeed.com/rpc/search?q={query}&start={self.offset}&indeedcsrftoken={token}"
 
         cmd = f"""curl '{indeed_url}' """ + """\
