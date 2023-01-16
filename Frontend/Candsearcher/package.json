@@ -1,9 +1,9 @@
 {
 		"name": "candsearch",
 		"version": "1.0.0",
-		"description": "Codebase for Aaveg Inductions site",
+		"description": "Codebase for the HQ Hack 23 project",
 		"repository": "https://github.com/aadarsh-ram/hq-hack-23.git",
-		"author": "Project onn",
+		"author": "Project Recon Onn",
 		"license": "MIT",
 		"scripts": {
 				"lint": "eslint --ext .js,.jsx,.ts,.tsx .",

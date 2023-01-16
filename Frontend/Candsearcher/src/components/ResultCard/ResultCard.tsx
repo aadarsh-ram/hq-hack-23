@@ -72,13 +72,13 @@ const Resultcard = (props : ResultCardprops ) => {
         <>
             <div className={styles.cardContainer}>
                 <div className={styles.jobtitle}>
-                    {props.data.jobTitle}
+                    {props.data.name}
                 </div>
                 <div className={styles.location}>
                     {props.data.location}
                 </div>
                 <div className={styles.name}>
-                    {props.data.currentJob}
+                    {props.data.education}
                 </div>  
                 <div className={styles.showbutton}>
                     <Button onClick={handleclick}>

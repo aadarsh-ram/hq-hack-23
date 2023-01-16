@@ -7,53 +7,31 @@ import { Apiurls } from "../../utils/content";
 
 
 const Result : resultProps = {
-    jobTitle : "Sales manager",
-    location : "Delhi",
-    currentJob: "ICICI Bank",
+    name : "Some name",
+    education : "Some education",
+    location : "Some location",
 }
 
 const Result2 : resultProps = {
-    jobTitle : "Sales manager",
-    location : "Dehradun",
-    currentJob : "Idea cellular Ltd.",
+    name : "Some name",
+    education : "Some education",
+    location : "Some location",
 }
 const Result3 : resultProps = {
-    jobTitle : "Sales Executive",
-    location : "Navi mumbai",
-    currentJob : "Novasatam Food Pvt limited "
+    name : "Some name",
+    education : "Some education",
+    location : "Some location",
 }
 const Result4 : resultProps = {
-    jobTitle : "Tele Sales Executive",
-    location : "Amritsar",
-    currentJob : "Nextday marketing Solutions"
-}
-const Result5 : resultProps = {
-    jobTitle : "Sales Manager",
-    location : "Calicut",
-    currentJob : "Toy triangle"
-}
-const Result6 : resultProps = {
-    jobTitle : "Sales manager",
-    location : "Jamshedpur",
-    currentJob : "Kapsons Industries Pvt Ltd"
-}
-
-const Result7 : resultProps = {
-    jobTitle : "Sales Executive",
-    location : "Bangalore",
-    currentJob : "Vedantu"
-}
-const Result8 : resultProps = {
-    jobTitle : "Sales Executive",
-    location : "SantaCruz",
-    currentJob : "QuesCorp"
+    name : "Some name",
+    education : "Some education",
+    location : "Some location",
 }
 
 
 const ResultsPage = () => {
 
-    const [results,setresults] = useState<resultProps[]>([Result,Result2,Result3,Result4,Result5,Result6,Result7,Result8]);
-    const[pagenum,setpageNum] = useState<number>(0);
+    const [results,setresults] = useState<resultProps[]>([Result,Result2,Result3,Result4]);
 
     useEffect(()=>{
         fetch(`${Apiurls[2].url}/1`,
@@ -66,7 +44,6 @@ const ResultsPage = () => {
         ).then(async(response)=>{
             let jd = await(response.json())
             console.log(jd);
-            console.log("here");
             fetch(encodeURI(`${Apiurls[3].url}?keywords=${(jd.keywords)}&offset=1`),
                 {
                     method:'GET',
@@ -75,8 +52,16 @@ const ResultsPage = () => {
                     }
                 }
             ).then(async(res)=>{
-                let candidates = await(res.json())
+                let candidates = await(res.json());
                 console.log(candidates);
+                let result = candidates.map((candidate: any)=>{
+                    return {
+                        name : candidate.name,
+                        education : candidate.education,
+                        location : candidate.location
+                    }
+                })
+                setresults(result);
             }).catch((e)=>{
                 console.log(e);
             })
@@ -87,7 +72,6 @@ const ResultsPage = () => {
 
     return ( 
         <div className={styles.pageContainer}>
-            <ResultRow row={results} />
             <ResultRow row={results} />
         </div>
     );

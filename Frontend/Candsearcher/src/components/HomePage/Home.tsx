@@ -23,7 +23,11 @@ const Home = () => {
                     Upload Files
                 </Button>
             </div>
-            
+            <div className={styles.footer}>
+                <Typography variant="h6">
+                    With love, by Project Recon Onn
+                </Typography>
+            </div>
         </div>
     );
 }

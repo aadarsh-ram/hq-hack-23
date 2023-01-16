@@ -4,6 +4,7 @@ export type resultProps = {
     phoneNo? : string,
     jobTitle? : string,
     location? : string,
+    education? : string,
     currentJob? :string,
     experience? :string,
     skills? :string
