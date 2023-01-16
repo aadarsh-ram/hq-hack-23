@@ -2,6 +2,8 @@ import { Button, Dialog} from "@mui/material";
 import * as React from "react"
 import styles from "./ViewUploads.module.css"
 import { Apiurls } from "../../utils/content";
+import { redirect, useNavigate } from "react-router-dom";
+
 
 
 type modalProps = {
@@ -10,23 +12,6 @@ type modalProps = {
     content : string,
 }
 
-
-const Modal = (props:modalProps) =>{
-    return(
-        <Dialog 
-        open={props.open}
-        onClose={props.handleClose}
-        className={styles.modal}
-        >
-            <div className={styles.content}>
-                {props.content}
-            </div>
-            <Button>
-                Perform this search
-            </Button>
-        </Dialog>
-    )
-}
 
 
 const ViewUploads = () => {
@@ -37,19 +22,45 @@ const ViewUploads = () => {
         keywords:string,
     }
 
+    const navigate = useNavigate();
 
-    const [alljds,setAlljds] = React.useState<jd[]>([]);
+
+    const[alljds,setAlljds] = React.useState<jd[]>([])
     const[fetchedjds,setFetchedjds]=React.useState<boolean>(false);
     const [open,setOpen] = React.useState<boolean>(false);
     const[jdcontent,setJdcontent] = React.useState<string>('');
+    const[jdid,setJdid] = React.useState<number>(0);
+
+    const Modal = (props:modalProps) =>{
+        return(
+            <Dialog 
+            open={props.open}
+            onClose={props.handleClose}
+            className={styles.modal}
+            >
+                <div className={styles.content}>
+                    {props.content}
+                </div>
+                <Button onClick={handleredirect}>
+                    Perform this search
+                </Button>
+            </Dialog>
+        )
+    }
+
+    const handleredirect = ()=>{
+        navigate(`/results/${jdid}`,{replace:true})
+    }
 
     const handleclose = ()=>{
         setOpen(false)
     }
 
-    const handleClick=()=>{
-
-    }
+    const handleClick=(index:number)=>{
+        setJdcontent(alljds[index].jdContent);
+        setOpen(true)
+        setJdid(index)
+    }   
 
     React.useEffect(()=>{
         fetch(Apiurls[1].url,
@@ -61,7 +72,14 @@ const ViewUploads = () => {
             }
         ).then(async(response)=>{
             let res = await response.json()
-            setAlljds(res)
+            res.forEach((ele:any)=>{
+                const newele:jd ={
+                    id:ele.id,
+                    jdContent:ele.jd_content,
+                    keywords:ele.keywords
+                }
+                setAlljds((alljds)=>[...alljds,newele])
+            })
             setFetchedjds(true)
         }).catch((error)=>{
             console.log(error);
@@ -78,13 +96,13 @@ const ViewUploads = () => {
             </div>
             {fetchedjds? <div className={styles.uploads}>
                     {
-                        alljds.map((ele)=>{
+                        alljds.map((ele,index)=>{
                             return(
                                 <div className={styles.uploaditem}>
                                     <div>
                                         Upload No {ele.id}
                                     </div>
-                                    <Button onClick={handleClick}>
+                                    <Button onClick={()=>handleClick(index)}>
                                         Show More
                                     </Button>
                                 </div>
