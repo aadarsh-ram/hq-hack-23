@@ -1,6 +1,4 @@
-import React, { useState } from "react";
-import ResultsPage from "./components/ResultsPage/ResultsPage";
-import Upload from "./components/Upload/Upload";
+import React from "react";
 import styles from "./index.module.css";
 import AllRoutes from "./AllRoutes";
 import Navbar from "./components/Navbar/Navbar";
