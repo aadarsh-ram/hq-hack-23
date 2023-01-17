@@ -25,7 +25,7 @@ const Home = () => {
             </div>
             <div className={styles.footer}>
                 <Typography variant="h6">
-                    With love, by Project Recon Onn
+                    With 💙 by Project Recon Onn
                 </Typography>
             </div>
         </div>
