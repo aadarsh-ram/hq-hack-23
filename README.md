@@ -1,5 +1,6 @@
 # hq-hack-23
 HireQuotient Hackathon 2023 - Team "Project Recon ONN"
+Check out problem statement [here](./problem_statement.pdf)
 
 ### API Setup:
 - Clone repo and change directory to `backend`
