@@ -96,27 +96,27 @@ async def handle_pdf_upload(request: Request, response: Response, file: UploadFi
     """
     Handle the pdf upload and returns content
     """
-    try:
-        with tempfile.TemporaryDirectory(prefix="jd-") as tmpdir:
+    # try:
+    with tempfile.TemporaryDirectory(prefix="jd-") as tmpdir:
 
-            filepath = f"{tmpdir}/{file.filename}"
+        filepath = f"{tmpdir}/{file.filename}"
 
-            if not filepath.endswith('.pdf'):
-                filepath += '.pdf'
+        if not filepath.endswith('.pdf'):
+            filepath += '.pdf'
 
-            async with aiofiles.open(filepath, 'wb') as out_file:
-                content = await file.read()  # async read
-                await out_file.write(content)
-            
-            content = parse_pdf(filepath) # JD Content
-            keywords = get_jd_keywords(content) # Keywords
+        async with aiofiles.open(filepath, 'wb') as out_file:
+            content = await file.read()  # async read
+            await out_file.write(content)
+        
+        content = parse_pdf(filepath) # JD Content
+        keywords = get_jd_keywords(content) # Keywords
 
-            await db.insert_jd(content, keywords)
+        await db.insert_jd(content, keywords)
 
-            return {"message": "File uploaded successfully"}
-            
-    except:
-        raise HTTPException(status_code=500, detail="File upload unsuccessful")
+        return {"message": "File uploaded successfully"}
+        
+    # except:
+    #     raise HTTPException(status_code=500, detail="File upload unsuccessful")
 
 if __name__ == '__main__':
     uvicorn.run("app:app", reload=True)

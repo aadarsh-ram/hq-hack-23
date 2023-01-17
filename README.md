@@ -22,6 +22,7 @@ python3 app.py
 - Install PostgreSQL (currently tested on v15)
 - Create a new database of your choice
 - Update the .env file in backend with your credentials
+- Don't forget to start the database service before using the API
 
 ### Frontend Setup:
 - Change directory to `Frontend/Candsearcher`
