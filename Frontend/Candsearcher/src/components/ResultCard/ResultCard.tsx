@@ -5,11 +5,8 @@ import { resultProps } from "../ResultsPage/types";
 import { Button, Modal } from "@mui/material";
 import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
-import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
-import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
 
 type ResultCardprops = {
@@ -31,28 +28,6 @@ export interface DialogTitleProps {
     onClose: () => void;
 }
 
-
-function BootstrapDialogTitle(props: DialogTitleProps) {
-    const { children, onClose, ...other } = props;
-  
-    return (
-      <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
-        {children}
-        {onClose ? (
-          <IconButton
-            aria-label="close"
-            onClick={onClose}
-            sx={{
-              color: (theme) => theme.palette.grey[500],
-            }}
-          >
-            <CloseIcon />
-          </IconButton>
-        ) : null}
-      </DialogTitle>
-    );
-  }
-
 const Resultcard = (props : ResultCardprops ) => {
 
 
@@ -66,20 +41,18 @@ const Resultcard = (props : ResultCardprops ) => {
         setOpen(false)
     }
 
-    let k : keyof typeof props.data
-
     return ( 
         <>
             <div className={styles.cardContainer}>
-                <div className={styles.jobtitle}>
-                    {props.data.name}
-                </div>
-                <div className={styles.location}>
-                    {props.data.location}
-                </div>
                 <div className={styles.name}>
+                    {props.data.name?.toLowerCase()}
+                </div>
+                <Typography variant="body1">
+                    {props.data.location}
+                </Typography>
+                <Typography variant="body1">
                     {props.data.education}
-                </div>  
+                </Typography>  
                 <div className={styles.showbutton}>
                     <Button onClick={handleclick}>
                         Show More
@@ -92,28 +65,25 @@ const Resultcard = (props : ResultCardprops ) => {
         open={open}
         className={styles.modal}
       >
-        <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
-          {props.data.jobTitle}
-        </BootstrapDialogTitle>
         <DialogContent dividers>
         {
             Object.entries(props.data).map(([key,value]) => {
-                return(
-                    <>
-                        <Typography gutterBottom>
+                return (
+                    <div className={styles.modalContent}>
+                        <Typography variant="h6" gutterBottom>
                             {key.toUpperCase()}
                         </Typography>
-                        <Typography gutterBottom>
-                            {value.toLowerCase()}
+                        <Typography style={{whiteSpace: 'pre-line'}} gutterBottom>
+                            {value === '' ? 'Not Available' : value}
                         </Typography>
-                    </>
+                    </div>
                 )
             })
         }
         </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={handleClose}>
-            Ok!
+            Ok
           </Button>
         </DialogActions>
       </BootstrapDialog>

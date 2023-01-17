@@ -4,6 +4,7 @@ import styles from "./ResultsPage.module.css"
 import Resultcard from "../ResultCard/ResultCard";
 import ResultRow from "../ResultRow/ResultRow";
 import { Apiurls } from "../../utils/content";
+import { Grid } from "@mui/material";
 
 
 const Result : resultProps = {
@@ -12,26 +13,10 @@ const Result : resultProps = {
     location : "Some location",
 }
 
-const Result2 : resultProps = {
-    name : "Some name",
-    education : "Some education",
-    location : "Some location",
-}
-const Result3 : resultProps = {
-    name : "Some name",
-    education : "Some education",
-    location : "Some location",
-}
-const Result4 : resultProps = {
-    name : "Some name",
-    education : "Some education",
-    location : "Some location",
-}
-
 
 const ResultsPage = () => {
 
-    const [results,setresults] = useState<resultProps[]>([Result,Result2,Result3,Result4]);
+    const [results,setresults] = useState<resultProps[]>([Result,Result,Result,Result,Result,Result,Result,Result]);
 
     useEffect(()=>{
         fetch(`${Apiurls[2].url}/1`,
@@ -43,7 +28,6 @@ const ResultsPage = () => {
             }
         ).then(async(response)=>{
             let jd = await(response.json())
-            console.log(jd);
             fetch(encodeURI(`${Apiurls[3].url}?keywords=${(jd.keywords)}&offset=1`),
                 {
                     method:'GET',
@@ -53,13 +37,19 @@ const ResultsPage = () => {
                 }
             ).then(async(res)=>{
                 let candidates = await(res.json());
-                console.log(candidates);
                 let result = candidates.map((candidate: any)=>{
-                    return {
+                    let candidateData = {
                         name : candidate.name,
                         education : candidate.education,
-                        location : candidate.location
+                        location : candidate.location,
+                        experience : ''
                     }
+                    const experience : any = [];
+                    candidate.resumeCardItems.map((item: any)=>{
+                        experience.push(item.title+' - '+item.location);
+                    })
+                    candidateData['experience'] = experience.join('\n');
+                    return candidateData;
                 })
                 setresults(result);
             }).catch((e)=>{
@@ -71,9 +61,18 @@ const ResultsPage = () => {
     },[])
 
     return ( 
-        <div className={styles.pageContainer}>
-            <ResultRow row={results} />
-        </div>
+        <Grid container 
+            style={{marginTop: "4%", marginLeft: 2, overflowY: "scroll", alignItems: "stretch"}} 
+            spacing={2}
+            className={styles.pageContainer}>
+            {
+                results.map((result,index)=>{
+                    return <Grid item xs={3}>
+                        <Resultcard data={result}/>
+                    </Grid>
+                })
+            }
+        </Grid>
     );
 }
  

@@ -6,6 +6,6 @@ export type resultProps = {
     location? : string,
     education? : string,
     currentJob? :string,
-    experience? :string,
+    experience? : [],
     skills? :string
 }

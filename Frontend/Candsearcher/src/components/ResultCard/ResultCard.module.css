@@ -1,16 +1,15 @@
 .cardContainer{
     height: 100%;
-    width: 23%;
+    width: 100%;
     background-color: #FFFFFF;
     border-radius: 15px;
     box-shadow: 4px 5px 4px 5px #4D4B4C;
-    display: flex;
-    flex-direction: column;
     padding: 3%;
     justify-content: space-between;
 }
 
 .name,.jobtitle,.location{
+    text-transform: capitalize;
     font-family: 'Secular One', sans-serif;
     font-size: 1.2rem;
 }
