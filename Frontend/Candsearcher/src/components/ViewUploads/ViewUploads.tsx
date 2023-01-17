@@ -34,16 +34,19 @@ const ViewUploads = () => {
     const Modal = (props:modalProps) =>{
         return(
             <Dialog 
-            open={props.open}
-            onClose={props.handleClose}
-            className={styles.modal}
+                maxWidth={"md"}
+                open={props.open}
+                onClose={props.handleClose}
             >
-                <div className={styles.content}>
-                    {props.content}
-                </div>
+                <Typography variant="h5" sx={{mt: 2, mb: 2}} className={styles.title}>
+                    JD Content
+                </Typography>
                 <Button onClick={handleredirect}>
-                    Perform this search
+                    Perform this search on Indeed
                 </Button>
+                <Typography variant="body1" style={{whiteSpace: 'pre-line'}}>
+                    {props.content}
+                </Typography>
             </Dialog>
         )
     }
@@ -86,8 +89,6 @@ const ViewUploads = () => {
         })
     },[])
 
-    const view=[1,2,3,4]
-
     return ( 
         <div className={styles.container}>
             <Modal open={open} handleClose={handleclose} content={jdcontent} />
@@ -100,10 +101,10 @@ const ViewUploads = () => {
                     {
                         alljds.map((ele,index)=>{
                             return(
-                                <div className={styles.uploaditem}>
-                                    <div>
+                                <div key={index} className={styles.uploaditem}>
+                                    <Typography variant="h6">
                                         Upload No {ele.id}
-                                    </div>
+                                    </Typography>
                                     <Button onClick={()=>handleClick(index)}>
                                         Show More
                                     </Button>
