@@ -14,7 +14,7 @@ python -m venv venv
 ```
 pip install -r requirements.txt
 ```
-- Set required environment variables in `.env` file
+- Set required environment variables in `.env` file after renaming the `.env.example` file
 - Start the API using the following command:
 ```
 python3 app.py
