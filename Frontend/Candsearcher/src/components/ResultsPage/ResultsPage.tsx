@@ -62,7 +62,7 @@ const ResultsPage = () => {
 
     return ( 
         <Grid container 
-            style={{marginTop: "4%", marginLeft: 2, overflowY: "scroll", alignItems: "stretch"}} 
+            style={{marginTop: "4%", alignItems: "stretch", padding: "0 3%"}} 
             spacing={2}
             className={styles.pageContainer}>
             {
